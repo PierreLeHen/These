@@ -1,0 +1,140 @@
+% Chapter 1
+
+\chapter{Background and Literature Review} % Main chapter title
+
+\label{Chapter2} % Change X to a consecutive number; for referencing this chapter elsewhere, use \ref{ChapterX}
+
+\lhead{Chapter 2. \emph{Introduction}} % Change X to a consecutive number; this is for the header on each page - perhaps a shortened title
+
+%----------------------------------------------------------------------------------------
+%	SECTION 1
+%----------------------------------------------------------------------------------------
+
+
+\section{Artificial Neural Networks}
+\subsection{ANN : a framework for many different machine learning algorithms}
+
+Artificial neural networks have been conceptualized on the purpose to mimic how the human brain performs a task via the use of simplified mathematical models. A neural network is a machine learning algorithm as it is capable to learn, recognize patterns and generalize. 
+
+Some machine learning implementations can deal with certain tasks more efficiently than human brain. For example, in chess, the program DeepBlue managed to beat the world champion Kasparov in 1997. 20 years after, for the game go, the program AlphaGo also managed to beat the best go player in the world. Nevertheless, computers are not able of equaling the brain's cognitive capacity, its flexibility, robustness and energy efficiency. Indeed, neural network are mono task, they can perform well for only precise task to answer one problem, brains can do several different tasks and also in the same time.
+
+Machine learning has 4 learning paradigms, which correspond to a particular task.
+
+The first one is called predictive or supervised learning. Its purpose is to learn a mapping function from a know data and its label. This function can then be reused to find the classification of new data. 
+
+The second one is called descriptive or unsupervised learning. This type of learning is more complex and abstract to understand than supervised learning because the purpose is to group training data for which we don't know the labels into clusters by using a similarity metric. 
+A cluster is a group of data which share similar elements.
+The aim is to produce new knowledge by discovering hidden structure in the data.
+
+The third type is semi-supervised learning. As indicated by its name this algorithm is a mix between the two other algorithms : most of the data is unlabelled, only a part is to identify the different groups which compose the set. This method is supposed to be more efficient that unsupervised learning without the time and costs needed to label all the data in supervised learning.
+
+The last type of learning is reinforcement learning. Without annotated data like unsupervised learning, this type manages to find connections between data based on the use of rewards and punishments.
+
+In this paper, all the neural networks mentioned use supervised learning.
+
+
+
+\subsection{Single-layer perceptron}
+
+
+
+In 1943, McCulloch and Pitts proposed the first conception of a formal neuron model \cite{mcculloch}. An artificial neuron is a biologically inspired mathematical model that mimics the basic functions of biological neurons: processes information and transmits it \cite{neuron}. 
+
+
+
+
+
+
+
+
+ A gradient descent is an optimization function which can be used to find the local minimum for a differentiable function
+
+
+\subsection{Multi-layer perceptron}
+
+Artificial neural networks are composed by many of these artificial neurons which are interconnected and organized in layers. 
+
+\section{Convolutional neural netwoks}
+\subsection{Overview}
+Neural networks have been an active research field. Nowadays, researchers study how to optimize and improve previous model found the last century  paper overview
+\subsection {AlexNet}
+\subsection {VGGNet}
+\subsection {GoogLeNet}
+\section{Robustness of neural netwoks}
+
+
+
+\section{Methods to find adversarial examples}
+
+Different methods have been studied to improve robustness of neural networks. (PAPER Adversarial Attacks and Defenses Against Deep Neural Networks: A Survey)
+These methods are used to provide guarantee on the safety of networks. Basically an adversarial example can be found by adding to an image natural perturbations such as fog or sunlight. Despite these perturbations, humans will not misclassify the image.
+
+There are three main types of studies concerning adersarial attacks:
+
+- The first one is about non-targeted adversarial attacks. This method consists of modiying the original image to make the network classify it at another random class.
+- The second subject area deals with targeted adversarial attacks. This method targets, as its name assumes, one type of class to misclassify it into another precise one.
+- The third study concerns defenses against adversarial attacks. This field deals with the problematic of building robust classifiers which are not fooled by adversarial examples. 
+
+Famous methods to find adversarial examples :
+
+- fast gradient sign FGSM
+
+This method is the root of many other methods. The main idea of this method is to add noise to an image at each step of the process to classify an image. Advesarial examples can be easily found on models wich use linearity. FSM is based on this assumption and uses the sign or the gradient of the loss function of the model to add or substract small error to each pixel
+
+** put FGSM formula and explain each term
+
+** put image of the panda ?
+
+
+- Projected Gradient Descent
+
+This method is a multi-step variant of FGSM and it is why it's more efficient than it. Indead FGSM is a one-step approach.
+It works well for high dimensions cases. 
+If a network resist to attacks made with this method, it means it is robust against a lot of other attacks.
+** Put the formula and explain each term
+
+- Basic Iterative Method (IBM)
+
+This method is an iterative version of FGSM. This method is more efficient than FGSM beacause the noise is applied many times instead of once.  Networks which are trained to be robust against one-step advesarial attacks should fail with the attacks made with this method. To avoid put to much noise, the pixel are clipped.
+
+** Put the formula and explain each term
+
+- Carlini-Wagner
+
+This method is able to find each time an adversarial example on defensivelly distilled and undistilled networks by proposing  3 attacks from 3  different algorithms L0 L2 Linf.  Defensive distillation is a method used to improve the robustness of a network against adversarial examples.
+
+L0 attack  is the first one which manage to find advesarial example one images from the database ImageNet
+
+** Put definition undistilled networks
+** Put the differences between these 3 different attacks
+
+-Jacobian-based Saliency Map Approach (JSMA)
+
+FSMA is a method  used for targeted misclassification and looks for the smallest perturbation to fool the classification. Compared to the other methods that use output variations to find the related input changes, JSMA builds a map between the input modifications and the output variations. This method is called forward derivative. Like IBM, this method iteratively perturbs features of input data which are the most likely to lead a misclassification with constant offset until the target misclassification is found.
+
+ 
+** Put the formula and explain each term
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+%----------------------------------------------------------------------------------------
+%	SECTION 2
+%----------------------------------------------------------------------------------------
+
+\section{Methods used in Research Papers to evaluate robustness of the neural netwoks}
+\subsection {DLV}
+\subsection {two-player game}
+\subsection {DeepPoly}
+
