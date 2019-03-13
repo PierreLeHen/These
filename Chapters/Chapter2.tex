@@ -36,23 +36,95 @@ In this paper, all the neural networks mentioned use supervised learning.
 
 \subsection{Single-layer perceptron}
 
-
-
 In 1943, McCulloch and Pitts proposed the first conception of a formal neuron model \cite{mcculloch}. An artificial neuron is a biologically inspired mathematical model that mimics the basic functions of biological neurons: processes information and transmits it \cite{neuron}. 
 
+Single layer perceptron is the most basic ANN. It is composed by an input and an output layer containing one neuron or more also called node. The input layer receives the data to be processed and the output layer makes the prediction about the input. Even if there are two layers, this architecture is called single layer perceptron as no computation is made in the input layer. The full process is divided into two times : first the forward propagation and then the backpropagation. 
+
+During the forward propagation, the neuron in the output layer is fed by inputs data which are, for example, pixels from an image. Every pixel is associated to a weight which is randomly initialized. 
+The first step of the process made by this neuron is to sum all these pixels values with their weights into a variable $Z$.
+
+\begin{equation}
+Z=w^T x + b
+\end{equation}
+where:
+
+$w^T$ is the transpose of the weight matrix 
+
+$x$ is the matrix containing the values of the pixels of the input  
+
+$b$  the bias 
+
+The bias shifts the decision boundary and does not depend on any input value, it is often initialized at 0.
+
+Then, this function is submitted to an activation function that fire when the out of this function is above a threshold.
+
+\begin{figure}[htbp]
+  \centering
+    \includegraphics[width=\textwidth]{Figures/Perceptron.png}
+    \rule{35em}{0.5pt}
+  \caption[Schema of a perceptron]{Schema of a perceptron}
+  \label{fig:Perceptron}
+\end{figure}
+
+The aim of the classification process is to minimize the cost. The cost is the average of all the losses which represent the errors between predictions of the model and the real labels of the pictures.
+To minimize this cost, we can transform the training task of the ANN into an optimization problem by using a gradient descent, which is a local search algorithm. This algorithm is be used to find the local minimum for a differentiable function. This local minimum corresponds to the state where the model has the best accuracy. 
+
+During the backpropagation, this gradient descent algorithm is applied. The process goes backward in the network to update the weights and the bias to decrease the cost and so the number of errors by applying learning rules. 
+
+This algorithm is repeated until the cost has converged.
+
+Let's suppose we want to recognize if a picture contains a cat (label 1) or not (label 0), we can use in the output layer, the activation function sigmoid which returns a value between 0 and 1.
+
+\begin{equation}
+{\hat{y}} = {sigmoid(Z)}=\frac{1}{1+e^{-Z} }
+\end{equation}
+where:
+
+$\hat{y}$ is the label prediction made by the neuron
+
+The predicted label is then set as 1 if the output of the function \emph{sigmoid} is above a treshold, for example 0,5. There are a lot of different activation functions and they are chosen regarding the nature of the task. 
 
 
-
-
-
-
-
- A gradient descent is an optimization function which can be used to find the local minimum for a differentiable function
 
 
 \subsection{Multi-layer perceptron}
 
-Artificial neural networks are composed by many of these artificial neurons which are interconnected and organized in layers. 
+Like the previous architecture, multi-layer perceptron is composed by an input and an output layer and also one or several hidden layers. Each hidden layer contains a specific number of nodes. In this architecture, each node is connected to every node in the adjacent layers but not to the nodes in the same layer. This type of connections where the data flow in one direction is called feedforward, there is no recursivity. 
+
+During the forward propagation, the hidden layers apply activation functions on their inputs and transmit the information between the input and the output layer.
+
+
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=\textwidth]{Figures/multi_layer.png}
+    \rule{35em}{0.5pt}
+  \caption[Schema of a multi-layer perceptron]{Schema of a multi-layer perceptron with one hidden layer composed by 15 neurons for a classification task involving 10 differents classes}
+  \label{fig:Muli-layer perceptron}
+\end{figure}
+
+The reason to use this kind of architecture is that it has been demonstrated standard multi-layer feedforward networks with as few as a single hidden layer and arbitrary bounded and nonconstant activation function can approximate any continuous function \cite{multi}.
+Indeed, ANN without hidden units can only produce limited mapping model. During the backpropagation, the learning rules are both applied in the hidden layer(s) and in the output layer and this makes the model performing better for more complex classification tasks.
+
+Let's suppose we want to classify pictures into 10 classes. We can use a multi-layer perceptron which output layer is composed by 10 neurons. The activation function sigmoid can be used for the nodes in the hidden layer but not in the output one. We have to use the softmax activation function which is the corresponding function of sigmoid activation for more than two classes. It assigns decimal probabilities to each class. The sum of these decimals must be 1.0. 
+
+\begin{equation}
+{softmax(x)_{j}}=\frac{e^{{Z}_{j}}}{\sum_{i=1}^k e^{Z_{i}} }
+\end{equation}
+
+where:
+
+${x}$ is the input picture
+
+${j}$ is any particular class we want to get the probability
+
+${k}$ is the number of classes
+
+${Z}$ is the variable that sum all the input values with their associated weights (see equation 2.1) 
+
+To get the prediction of the model for an input, we simply need to recover the corresponding class to the highest probability returned by \emph{softmax}.
+
+ 
 
 \section{Convolutional neural netwoks}
 \subsection{Overview}
@@ -135,6 +207,6 @@ FSMA is a method  used for targeted misclassification and looks for the smallest
 
 \section{Methods used in Research Papers to evaluate robustness of the neural netwoks}
 \subsection {DLV}
-\subsection {two-player game}
+\subsection {Two-player game}
 \subsection {DeepPoly}
 
