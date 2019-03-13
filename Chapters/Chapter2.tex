@@ -18,7 +18,7 @@ Artificial neural networks have been conceptualized on the purpose to mimic how 
 
 Some machine learning implementations can deal with certain tasks more efficiently than human brain. For example, in chess, the program DeepBlue managed to beat the world champion Kasparov in 1997. 20 years after, for the game go, the program AlphaGo also managed to beat the best go player in the world. Nevertheless, computers are not able of equaling the brain's cognitive capacity, its flexibility, robustness and energy efficiency. Indeed, neural network are mono task, they can perform well for only precise task to answer one problem, brains can do several different tasks and also in the same time.
 
-Machine learning has 4 learning paradigms, which correspond to a particular task.
+Machine learning has four learning paradigms, which correspond to a particular task.
 
 The first one is called predictive or supervised learning. Its purpose is to learn a mapping function from a know data and its label. This function can then be reused to find the classification of new data. 
 
@@ -66,10 +66,8 @@ Then, this function is submitted to an activation function that fire when the ou
   \label{fig:Perceptron}
 \end{figure}
 
-The aim of the classification process is to minimize the cost. The cost is the average of all the losses which represent the errors between predictions of the model and the real labels of the pictures.
-To minimize this cost, we can transform the training task of the ANN into an optimization problem by using a gradient descent, which is a local search algorithm. This algorithm is be used to find the local minimum for a differentiable function. This local minimum corresponds to the state where the model has the best accuracy. 
 
-During the backpropagation, this gradient descent algorithm is applied. The process goes backward in the network to update the weights and the bias to decrease the cost and so the number of errors by applying learning rules. 
+During the backpropagation, the gradient descent algorithm is applied. The aim of the classification process is to minimize the cost. The cost is the average of all the losses which represent the errors between the predictions of the model and the real labels of the pictures. To minimize this cost, we can transform the training task of the ANN into an optimization problem by using a gradient descent, which is a local search algorithm. This algorithm is be used to find the local minimum for a differentiable function. This local minimum corresponds to the state where the model has the best accuracy. Thereby, the process goes backward in the network to update the weights and the bias to decrease the cost and so the number of errors by applying learning rules. 
 
 This algorithm is repeated until the cost has converged.
 
@@ -126,9 +124,17 @@ To get the prediction of the model for an input, we simply need to recover the c
 
  
 
-\section{Convolutional neural netwoks}
+\section{Convolutional neural networks}
 \subsection{Overview}
-Neural networks have been an active research field. Nowadays, researchers study how to optimize and improve previous model found the last century  paper overview
+Machine learning algorithms are good to process a small amount of data but they don't scale well for a large amount. This is the main reason which explain the elaboration of deep neural networks. A lot of different libraries (Theano, TensorFlow, Torch) and interfaces (Keras,Lasagne,Blocks) have been created in order to make their implementations easier without a deep understanding of the maths theory, high-level programming skills and potential code issues. 
+
+Convolutional neural network is one of the most famous deep neural network which is directly inspired by the primary visual cortex of the brain \cite{CNN}.  
+
+It is a type of feedforward neural network made up of neurons that have learnable weights and biases, very similar to the multi-layer perceptron.
+
+CNNs are designed to process different data types but they are mainly used to classify two dimensional images. 
+
+
 \subsection {AlexNet}
 \subsection {VGGNet}
 \subsection {GoogLeNet}
@@ -138,55 +144,47 @@ Neural networks have been an active research field. Nowadays, researchers study 
 
 \section{Methods to find adversarial examples}
 
-Different methods have been studied to improve robustness of neural networks. (PAPER Adversarial Attacks and Defenses Against Deep Neural Networks: A Survey)
+Different methods have been studied to improve robustness of neural networks \cite{survey}. 
 These methods are used to provide guarantee on the safety of networks. Basically an adversarial example can be found by adding to an image natural perturbations such as fog or sunlight. Despite these perturbations, humans will not misclassify the image.
 
-There are three main types of studies concerning adersarial attacks:
+There are three main types of studies concerning adversarial attacks:
 
-- The first one is about non-targeted adversarial attacks. This method consists of modiying the original image to make the network classify it at another random class.
+- The first one is about non-targeted adversarial attacks. This method consists of modifying the original image to make the network classify it at another random class.
+
 - The second subject area deals with targeted adversarial attacks. This method targets, as its name assumes, one type of class to misclassify it into another precise one.
+
 - The third study concerns defenses against adversarial attacks. This field deals with the problematic of building robust classifiers which are not fooled by adversarial examples. 
 
 Famous methods to find adversarial examples :
 
 - fast gradient sign FGSM
 
-This method is the root of many other methods. The main idea of this method is to add noise to an image at each step of the process to classify an image. Advesarial examples can be easily found on models wich use linearity. FSM is based on this assumption and uses the sign or the gradient of the loss function of the model to add or substract small error to each pixel
-
-** put FGSM formula and explain each term
-
-** put image of the panda ?
-
+This method is the root of many other methods. The main idea of this method is to add noise to an image at each step of the process to classify an image. Adversarial examples can be easily found on models which use linearity. FSM is based on this assumption and uses the sign or the gradient of the loss function of the model to add or subtract small error to each pixel
 
 - Projected Gradient Descent
 
-This method is a multi-step variant of FGSM and it is why it's more efficient than it. Indead FGSM is a one-step approach.
+This method is a multi-step variant of FGSM and it is why it's more efficient than it. Indeed FGSM is a one-step approach.
 It works well for high dimensions cases. 
 If a network resist to attacks made with this method, it means it is robust against a lot of other attacks.
-** Put the formula and explain each term
+
 
 - Basic Iterative Method (IBM)
 
-This method is an iterative version of FGSM. This method is more efficient than FGSM beacause the noise is applied many times instead of once.  Networks which are trained to be robust against one-step advesarial attacks should fail with the attacks made with this method. To avoid put to much noise, the pixel are clipped.
+This method is an iterative version of FGSM. This method is more efficient than FGSM because the noise is applied many times instead of once.  Networks which are trained to be robust against one-step adversarial attacks should fail with the attacks made with this method. To avoid put to much noise, the pixel are clipped.
 
-** Put the formula and explain each term
 
 - Carlini-Wagner
 
-This method is able to find each time an adversarial example on defensivelly distilled and undistilled networks by proposing  3 attacks from 3  different algorithms L0 L2 Linf.  Defensive distillation is a method used to improve the robustness of a network against adversarial examples.
+This method is able to find each time an adversarial example on defensively distilled and undistilled networks by proposing  3 attacks from 3  different algorithms L0 L2 Linf.  Defensive distillation is a method used to improve the robustness of a network against adversarial examples.
 
-L0 attack  is the first one which manage to find advesarial example one images from the database ImageNet
+L0 attack  is the first one which manage to find adversarial example one images from the database ImageNet
 
-** Put definition undistilled networks
-** Put the differences between these 3 different attacks
 
 -Jacobian-based Saliency Map Approach (JSMA)
 
 FSMA is a method  used for targeted misclassification and looks for the smallest perturbation to fool the classification. Compared to the other methods that use output variations to find the related input changes, JSMA builds a map between the input modifications and the output variations. This method is called forward derivative. Like IBM, this method iteratively perturbs features of input data which are the most likely to lead a misclassification with constant offset until the target misclassification is found.
 
  
-** Put the formula and explain each term
-
 
 
 
