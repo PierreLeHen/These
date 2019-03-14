@@ -14,7 +14,7 @@
 \section{Artificial Neural Networks}
 \subsection{ANN : a framework for many different machine learning algorithms}
 
-Artificial neural networks have been conceptualized on the purpose to mimic how the human brain performs a task via the use of simplified mathematical models. A neural network is a machine learning algorithm as it is capable to learn, recognize patterns and generalize. 
+Artificial neural networks have been conceptualized on the purpose to mimic how the human brain performs a task via the use of simplified mathematical models. A neural network is a framework where many different machine learning algorithms are used together in order to make a network capable to learn, recognize patterns and generalize. 
 
 Some machine learning implementations can deal with certain tasks more efficiently than human brain. For example, in chess, the program DeepBlue managed to beat the world champion Kasparov in 1997. 20 years after, for the game go, the program AlphaGo also managed to beat the best go player in the world. Nevertheless, computers are not able of equaling the brain's cognitive capacity, its flexibility, robustness and energy efficiency. Indeed, neural network are mono task, they can perform well for only precise task to answer one problem, brains can do several different tasks and also in the same time.
 
@@ -29,8 +29,6 @@ The aim is to produce new knowledge by discovering hidden structure in the data.
 The third type is semi-supervised learning. As indicated by its name this algorithm is a mix between the two other algorithms : most of the data is unlabelled, only a part is to identify the different groups which compose the set. This method is supposed to be more efficient that unsupervised learning without the time and costs needed to label all the data in supervised learning.
 
 The last type of learning is reinforcement learning. Without annotated data like unsupervised learning, this type manages to find connections between data based on the use of rewards and punishments.
-
-In this paper, all the neural networks mentioned use supervised learning.
 
 
 
@@ -126,20 +124,49 @@ To get the prediction of the model for an input, we simply need to recover the c
 
 \section{Convolutional neural networks}
 \subsection{Overview}
-Machine learning algorithms are good to process a small amount of data but they don't scale well for a large amount. This is the main reason which explain the elaboration of deep neural networks. A lot of different libraries (Theano, TensorFlow, Torch) and interfaces (Keras,Lasagne,Blocks) have been created in order to make their implementations easier without a deep understanding of the maths theory, high-level programming skills and potential code issues. 
+Machine learning algorithms are good to process a small amount of data but they don't scale well for a large amount. This is the main reason which explain the elaboration of deep neural networks. A lot of different libraries (Theano, TensorFlow, Torch) and interfaces (Keras, Lasagne, Blocks) have been developed in order to make their implementations easier without a deep understanding of the maths theory, high-level programming skills and avoid potential code issues. 
 
-Convolutional neural network is one of the most famous deep neural network which is directly inspired by the primary visual cortex of the brain \cite{CNN}.  
+Convolutional neural network is one of the most famous class of deep neural network which is directly inspired by the primary visual cortex of the brain \cite{CNN}.  
 
-It is a type of feedforward neural network made up of neurons that have learnable weights and biases, very similar to the multi-layer perceptron.
+It is a type of feedforward neural network composed by neurons that have learnable weights and biases. This network is very similar to the multi-layer perceptron we have seen just before.
 
-CNNs are designed to process different data types but they are mainly used to classify two dimensional images. 
+CNNs are designed to process different data types but they are mainly used to analyze two dimensional images. In order to classify an image, the input data will be submitted to a serie of different layers : convolution layers, pooling layers, fully connected layers and then an ouput layer where the activation softmax is used. The convolution and the pooling layers are organized into three dimensions: width, height and depth.
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=\textwidth]{Figures/convol.jpeg}
+    \rule{35em}{0.5pt}
+  \caption[Schema of CNN]{Organization of the layers of a convolutional neural networks}
+  \label{fig:Muli-layer perceptron}
+\end{figure}
+
+
+CNNs perfom well in image classification because they take into account spatial structure of the image. Indeed, in the convolution layers, each neuron are connected to a small region of the input volume. This region is determined by a matrix called filter. It is then slided over all the inputs to recover a value for the hidden neuron according to a stride. A stride is the size of the step the convolution filter moves each time. For example, a filter of five by five pixels placed in the top left corner of an image layer will be connected to one neuron in the first hidden layer. The filter is then moved to one pixel on the right. This new region will be connected to the second neuron of the first hidden layer. This characteristic is called local collectivity. If the filter does not fit a part of the input image, the picture is padded with zero value pixels or we drop the part of the image where the filter can't be used. 
+
+
+Filters in convolution layers are used to extract features and so, each hidden neurons in the same layer will share the same weights and bias. In image classification, a feature is an individual measurable property such as edges and objects. This propriety makes CNNs robust to translational invariance. The output of these layers is called feature map. The depth of the features maps generated in the convolutional layer is not fixed and depend of the task we want to perform. For example, if ten filters are used to extract features of an input layer, the depth of the feature map generated will be ten. 
+
+After each convolution layers, an activation function called ReLU is applied. The purpose of this layer is to set all the negative values found in the previous layer to 0. This step makes the network to train much faster.
+
+Then, this rectified feature map will go through a pooling layer in order to reduce its number of dimensions. Pooling extraction is applied on each depth of the feature map. Like in the convolution layer, a filter with as stride is also used in order to separate the feature map into regions.
+
+\begin{figure}[H]
+  \centering
+    \includegraphics[width=\textwidth]{Figures/pool.png}
+    \rule{35em}{0.5pt}
+  \caption[Schema of pooling extraction]{Different strategies of pooling extraction using a 2x2 filter and stride 2}
+  \label{fig:Muli-layer perceptron}
+\end{figure}
+
+Different strategies of pooling extraction exist. The most used ones are max poling where only the highest values of a region is kept and average pooling where the output is the average of all the values in the region. 
+
+The feature maps matrix are then flattened into a vector which feed a fully connected network whose process is the same as described in the previous section of this paper. 
 
 
 \subsection {AlexNet}
 \subsection {VGGNet}
 \subsection {GoogLeNet}
 \section{Robustness of neural netwoks}
-
 
 
 \section{Methods to find adversarial examples}
